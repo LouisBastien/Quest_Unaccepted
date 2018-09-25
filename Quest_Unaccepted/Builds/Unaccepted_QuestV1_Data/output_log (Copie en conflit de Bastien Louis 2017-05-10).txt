@@ -1,0 +1,42 @@
+Initialize engine version: 5.6.0f3 (497a0f351392)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: AMD Radeon HD 7570M (ID=0x6841)
+    Vendor:   ATI
+    VRAM:     1004 MB
+    Driver:   15.201.1301.0
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\49059\Dropbox\Quest Unaccepted\Quest_Unaccepted\Builds\Unaccepted_QuestV1_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\49059\Dropbox\Quest Unaccepted\Quest_Unaccepted\Builds\Unaccepted_QuestV1_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\49059\Dropbox\Quest Unaccepted\Quest_Unaccepted\Builds\Unaccepted_QuestV1_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\49059\Dropbox\Quest Unaccepted\Quest_Unaccepted\Builds\Unaccepted_QuestV1_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\49059\Dropbox\Quest Unaccepted\Quest_Unaccepted\Builds\Unaccepted_QuestV1_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\49059\Dropbox\Quest Unaccepted\Quest_Unaccepted\Builds\Unaccepted_QuestV1_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\49059\Dropbox\Quest Unaccepted\Quest_Unaccepted\Builds\Unaccepted_QuestV1_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\49059\Dropbox\Quest Unaccepted\Quest_Unaccepted\Builds\Unaccepted_QuestV1_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.080 seconds
+Platform assembly: C:\Users\49059\Dropbox\Quest Unaccepted\Quest_Unaccepted\Builds\Unaccepted_QuestV1_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\49059\Dropbox\Quest Unaccepted\Quest_Unaccepted\Builds\Unaccepted_QuestV1_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 2.676140 ms
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.306614 ms
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 571.
+Total: 0.566188 ms (FindLiveObjects: 0.047039 ms CreateObjectMapping: 0.065000 ms MarkObjects: 0.419082 ms  DeleteObjects: 0.033783 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 9.170208 ms
+
+Unloading 233 unused Assets to reduce memory usage. Loaded Objects now: 323.
+Total: 5.794456 ms (FindLiveObjects: 0.106481 ms CreateObjectMapping: 0.078257 ms MarkObjects: 0.626485 ms  DeleteObjects: 4.981521 ms)
+
+Setting up 4 worker threads for Enlighten.
+  Thread -> id: d3c -> priority: 1 
+  Thread -> id: aa8 -> priority: 1 
+  Thread -> id: 1a84 -> priority: 1 
+  Thread -> id: 18b0 -> priority: 1 
