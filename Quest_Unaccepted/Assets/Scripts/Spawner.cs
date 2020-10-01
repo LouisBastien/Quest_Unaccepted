@@ -4,25 +4,20 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour {
 
-    public GameObject PNJ1;
-    public GameObject PNJ2;
-    public GameObject PNJ3;
-    public GameObject PNJ4;
-
+    public GameObject npc1;
+    public GameObject npc2;
+    public GameObject npc3;
+    public GameObject npc4;
+    [Space]
+    public Transform PnjParent = null;
     public float spawnTime = 3f;
     public Transform[] spawnPoints;
 
-    private GameObject ennemie;
-
-    void Start() {
+    public void Start() {
         InvokeRepeating("Spawn", spawnTime, spawnTime);
     }
 
-    void Update() {
-
-    }
-
-    void Spawn()
+    private void Spawn()
     {
         if (GameManager.onPause == false)
         {
@@ -31,21 +26,21 @@ public class Spawner : MonoBehaviour {
 
             if (number == 1)
             {
-                Instantiate(PNJ1, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+                Instantiate(npc1, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation, PnjParent.transform);
             }
             else
             if (number == 2)
             {
-                Instantiate(PNJ2, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+                Instantiate(npc2, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation, PnjParent.transform);
             }
             else
             if (number == 3)
             {
-                Instantiate(PNJ3, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+                Instantiate(npc3, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation, PnjParent.transform);
             }
             else
             {
-                Instantiate(PNJ4, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+                Instantiate(npc4, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation, PnjParent.transform);
             }
         }
     }

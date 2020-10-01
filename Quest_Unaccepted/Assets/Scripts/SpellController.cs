@@ -1,23 +1,18 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellController : MonoBehaviour {
-
+public class SpellController : MonoBehaviour
+{
     public Animator anim;
 
-	// Use this for initialization
-	void Start () {
-        anim.GetComponent<Animator>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    public void spell_activated(bool state)
+    public void Start()
     {
+        anim.GetComponent<Animator>();
+    }
+
+    public void ActivateSpell(bool state)
+    {
+        GetComponent<BoxCollider2D>().enabled = true;
         anim.SetBool("Spell_activated", state);
         StartCoroutine(Wait(0.05f));
     }
@@ -26,5 +21,14 @@ public class SpellController : MonoBehaviour {
     {
         yield return new WaitForSeconds(waitTime);
         anim.SetBool("Spell_activated", false);
+        GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("PNJ"))
+        {
+            other.gameObject.GetComponent<PnjController>().SetCanMove(false);
+        }
     }
 }

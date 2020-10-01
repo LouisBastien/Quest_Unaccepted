@@ -9,13 +9,13 @@ public class SceneLoader : MonoBehaviour {
 
     public void LoadScene(string scene)
     {
-        SceneManager.LoadScene(scene);
         scoreManager.SendMessage("UpdateHighScores");
+        SceneManager.LoadScene(scene);
     }
 
     public void QuitGame()
     {
-        Application.Quit();
         scoreManager.SendMessage("UpdateHighScores");
+        Application.Quit();
     }
 }

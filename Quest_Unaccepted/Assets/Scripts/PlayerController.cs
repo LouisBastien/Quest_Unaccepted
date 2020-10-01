@@ -6,23 +6,22 @@ public class PlayerController : MonoBehaviour {
 
     public float speed;
     public Animator anim;
-    public GameObject Spell;
-    public GameObject Spell_image_activated;
-    public GameObject Spell_image_unactivated;
+    public GameObject spell;
+    public GameObject spellActivatedImage;
+    public GameObject spellUnactivatedImage;
 
-    private bool inBoundary;
-    private bool Spell_canUse = false;
+    private bool canUseSpell = false;
 
     // Use this for initialization
-    void Start()
+    public void Start()
     {
         anim = GetComponent<Animator>();
-        Spell.GetComponent<SpellController>();
+        spell.GetComponent<SpellController>();
         StartCoroutine(Wait(5f));
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (GameManager.onPause == false)
         {
@@ -32,15 +31,15 @@ public class PlayerController : MonoBehaviour {
             var x = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
             var y = Input.GetAxis("Vertical") * Time.deltaTime * speed;
 
-            if (Spell_canUse)
+            if (canUseSpell)
             {
-                Spell_image_activated.SetActive(true);
-                Spell_image_unactivated.SetActive(false);
+                spellActivatedImage.SetActive(true);
+                spellUnactivatedImage.SetActive(false);
             }
             else
             {
-                Spell_image_activated.SetActive(false);
-                Spell_image_unactivated.SetActive(true);
+                spellActivatedImage.SetActive(false);
+                spellUnactivatedImage.SetActive(true);
             }
 
             if (x > 0 && y == 0)
@@ -98,10 +97,10 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetKey(KeyCode.Space))
             {
-                if (Spell_canUse)
+                if (canUseSpell)
                 {
-                    Spell.SendMessage("spell_activated", true);
-                    Spell_canUse = false;
+                    spell.SendMessage("ActivateSpell", true);
+                    canUseSpell = false;
                     StartCoroutine(Wait(5));
                 }
             }
@@ -110,7 +109,7 @@ public class PlayerController : MonoBehaviour {
 
     private IEnumerator Wait(float waitTime)
     {
-            yield return new WaitForSeconds(waitTime);
-            Spell_canUse = true;
+        yield return new WaitForSeconds(waitTime);
+        canUseSpell = true;
     }
 }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorkGenerator : MonoBehaviour {
+public class WorkGenerator {
 
-    private string[] mWorkTable = new string[] 
+    private readonly string[] workTable = new string[] 
     {
         "Forgeron",
         "Artisan",
@@ -51,8 +51,8 @@ public class WorkGenerator : MonoBehaviour {
         "lormier"
     };
 
-    public string generateWork()
+    public string GenerateWork()
     {
-        return (mWorkTable[Random.Range(0, mWorkTable.Length - 1)]);
+        return (workTable[Random.Range(0, workTable.Length - 1)]);
     }
 }

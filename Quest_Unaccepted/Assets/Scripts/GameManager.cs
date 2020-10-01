@@ -14,24 +14,24 @@ public class GameManager : MonoBehaviour {
 
     private bool canAddScore = true;
 
-    void Awake()
+    public void Awake()
     {
         Instance = this;
     }
 
-    void Start () {
+    public void Start () {
         CsvManager csvManager = new CsvManager();
         csvManager.Init();
-        csvManager.readFromFile();
+        csvManager.ReadFromFile();
 	}
 	
-	void Update () {
+	public void Update () {
         if (Input.GetKeyDown("escape"))
         {
             if (onPause == false)
-                pauseGame();
+                PauseGame();
             else
-                resumeGame();
+                ResumeGame();
             onPause = !onPause;
         }
         if (!onPause)
@@ -52,17 +52,17 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene("HighScores");
     }
 
-    private void addScore(int bonusScore)
+    private void AddScore(int bonusScore)
     {
         score += bonusScore;
     }
 
-    private void pauseGame()
+    private void PauseGame()
     {
         pause.SetActive(true);
     }
 
-    private void resumeGame()
+    private void ResumeGame()
     {
         pause.SetActive(false);
     }

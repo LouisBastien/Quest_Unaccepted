@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NameGenerator : MonoBehaviour {
+public class NameGenerator {
 
-    private string[] NameTable = 
+    private readonly string[] nameTable = 
     {
         "Scot",
         "Chi",
@@ -108,8 +108,8 @@ public class NameGenerator : MonoBehaviour {
         "Gertrudis"
     };
 
-    public string generateName()
+    public string GenerateName()
     {
-        return (NameTable[Random.Range(0, NameTable.Length - 1)]);
+        return (nameTable[Random.Range(0, nameTable.Length - 1)]);
     }
 }

@@ -7,122 +7,119 @@ public class PnjController : MonoBehaviour {
     public Transform target;
     public Transform myTransform;
     public GameObject popup;
+    public Transform popupParent;
     public Animator anim;
 
-    private int moveSpeed = 4;
+    private readonly int moveSpeed = 4;
     private int questCount = 0;
+    private bool canMove = true;
 
-    private string mName;
-    private string mWork;
+    private string npcName;
+    private string npcWork;
 
     private IEnumerator coroutine;
     private bool canPopup = true;
     private bool justSpawn = true;
-    private int mSortingOrder = 10;
+    private int sortingOrder = 10;
 
     public AudioSource mAudio;
 
-    private List<GameObject> listePopup;
-
-    void Awake()
+    public void Awake()
     {
         myTransform = transform;
+        popupParent = GameObject.Find("PopupParent").transform;
     }
 
-    void Start()
+    public void Start()
     {
         mAudio = GetComponent<AudioSource>();
 
         NameGenerator nameGenerator = new NameGenerator();
-        mName = nameGenerator.generateName();
+        npcName = nameGenerator.GenerateName();
 
         WorkGenerator workGenerator = new WorkGenerator();
-        mWork = workGenerator.generateWork();
+        npcWork = workGenerator.GenerateWork();
 
         anim = GetComponent<Animator>();
         target = GameObject.FindWithTag("Player").transform;
     }
 
-	void Update () {
+    public void Update () {
         if (GameManager.onPause == false)
         {
-
-/*            if (Input.GetKey(KeyCode.KeypadEnter))
-            {
-                destroyMe();
-            } */
-
             if (questCount == 0 && justSpawn == false)
             {
                 Destroy(this.gameObject);
             }
 
-            int x = Mathf.RoundToInt(target.transform.position.x - transform.position.x);
-            int y = Mathf.RoundToInt(target.transform.position.y - transform.position.y);
+            if (canMove)
+            {
+                int x = Mathf.RoundToInt(target.transform.position.x - transform.position.x);
+                int y = Mathf.RoundToInt(target.transform.position.y - transform.position.y);
 
-            if (x > 0 && y == 0)
-            {
-                anim.SetInteger("Orientation", 1);
-                myTransform.position = Vector2.MoveTowards(myTransform.position, target.transform.position, moveSpeed * Time.deltaTime);
-            }
-            else if (x > 0 && y > 0)
-            {
-                anim.SetInteger("Orientation", 2);
-                myTransform.position = Vector2.MoveTowards(myTransform.position, target.transform.position, moveSpeed * Time.deltaTime);
-            }
-            else if (x == 0 && y > 0)
-            {
-                anim.SetInteger("Orientation", 2);
-                myTransform.position = Vector2.MoveTowards(myTransform.position, target.transform.position, moveSpeed * Time.deltaTime);
-            }
-            else if (x < 0 && y > 0)
-            {
-                anim.SetInteger("Orientation", 2);
-                myTransform.position = Vector2.MoveTowards(myTransform.position, target.transform.position, moveSpeed * Time.deltaTime);
-            }
-            else if (x == 0 && y < 0)
-            {
-                anim.SetInteger("Orientation", 0);
-                myTransform.position = Vector2.MoveTowards(myTransform.position, target.transform.position, moveSpeed * Time.deltaTime);
-            }
-            else if (x < 0 && y < 0)
-            {
-                anim.SetInteger("Orientation", 0);
-                myTransform.position = Vector2.MoveTowards(myTransform.position, target.transform.position, moveSpeed * Time.deltaTime);
-            }
-            else if (x < 0 && y == 0)
-            {
-                anim.SetInteger("Orientation", 3);
-                myTransform.position = Vector2.MoveTowards(myTransform.position, target.transform.position, moveSpeed * Time.deltaTime);
-            }
-            else if (x > 0 && y < 0)
-            {
-                anim.SetInteger("Orientation", 0);
-                myTransform.position = Vector2.MoveTowards(myTransform.position, target.transform.position, moveSpeed * Time.deltaTime);
-            }
-            else
-            {
-                myTransform.position = Vector2.MoveTowards(myTransform.position, target.transform.position, moveSpeed * Time.deltaTime);
+                if (x > 0 && y == 0)
+                {
+                    anim.SetInteger("Orientation", 1);
+                    myTransform.position = Vector2.MoveTowards(myTransform.position, target.transform.position, moveSpeed * Time.deltaTime);
+                }
+                else if (x > 0 && y > 0)
+                {
+                    anim.SetInteger("Orientation", 2);
+                    myTransform.position = Vector2.MoveTowards(myTransform.position, target.transform.position, moveSpeed * Time.deltaTime);
+                }
+                else if (x == 0 && y > 0)
+                {
+                    anim.SetInteger("Orientation", 2);
+                    myTransform.position = Vector2.MoveTowards(myTransform.position, target.transform.position, moveSpeed * Time.deltaTime);
+                }
+                else if (x < 0 && y > 0)
+                {
+                    anim.SetInteger("Orientation", 2);
+                    myTransform.position = Vector2.MoveTowards(myTransform.position, target.transform.position, moveSpeed * Time.deltaTime);
+                }
+                else if (x == 0 && y < 0)
+                {
+                    anim.SetInteger("Orientation", 0);
+                    myTransform.position = Vector2.MoveTowards(myTransform.position, target.transform.position, moveSpeed * Time.deltaTime);
+                }
+                else if (x < 0 && y < 0)
+                {
+                    anim.SetInteger("Orientation", 0);
+                    myTransform.position = Vector2.MoveTowards(myTransform.position, target.transform.position, moveSpeed * Time.deltaTime);
+                }
+                else if (x < 0 && y == 0)
+                {
+                    anim.SetInteger("Orientation", 3);
+                    myTransform.position = Vector2.MoveTowards(myTransform.position, target.transform.position, moveSpeed * Time.deltaTime);
+                }
+                else if (x > 0 && y < 0)
+                {
+                    anim.SetInteger("Orientation", 0);
+                    myTransform.position = Vector2.MoveTowards(myTransform.position, target.transform.position, moveSpeed * Time.deltaTime);
+                }
+                else
+                {
+                    myTransform.position = Vector2.MoveTowards(myTransform.position, target.transform.position, moveSpeed * Time.deltaTime);
+                }
             }
         }
     }
 
-    void OnCollisionEnter2D(Collision2D coll)
+    public void OnCollisionEnter2D(Collision2D coll)
     {
         if (GameManager.onPause == false)
         {
             if (coll.gameObject.tag == "Player")
             {
                 Vector3 position = new Vector3(Random.Range(-9, 9), Random.Range(-4, 4), 0);
-                GameObject go = Instantiate(popup, position, Quaternion.identity);
+                GameObject go = Instantiate(popup, position, Quaternion.identity, popupParent);
                 go.GetComponent<PopupController>();
-                go.SendMessage("setPnjName", mName);
-                go.SendMessage("setPnjWork", mWork);
-                go.SendMessage("setSortingOrder", mSortingOrder);
-                go.SendMessage("setNPC", this.gameObject);
-                //                listePopup.Add(go);
+                go.SendMessage("SetNPCName", npcName);
+                go.SendMessage("SetNPCWork", npcWork);
+                go.SendMessage("SetSortingOrder", sortingOrder);
+                go.SendMessage("SetNPC", this.gameObject);
                 mAudio.Play();
-                mSortingOrder++;
+                sortingOrder++;
                 coroutine = WaitAndPopup(2.0f, coll);
                 StartCoroutine(coroutine);
                 canPopup = false;
@@ -132,22 +129,21 @@ public class PnjController : MonoBehaviour {
         }
     }
 
-    void OnCollisionStay2D(Collision2D coll)
+    public void OnCollisionStay2D(Collision2D coll)
     {
         if (GameManager.onPause == false)
         {
             if (coll.gameObject.tag == "Player" && canPopup == true)
             {
                 Vector3 position = new Vector3(Random.Range(-9, 9), Random.Range(-4, 4), 0);
-                GameObject go = Instantiate(popup, position, Quaternion.identity);
+                GameObject go = Instantiate(popup, position, Quaternion.identity, popupParent);
                 go.GetComponent<PopupController>();
-                go.SendMessage("setPnjName", mName);
-                go.SendMessage("setPnjWork", mWork);
-                go.SendMessage("setSortingOrder", mSortingOrder);
-                go.SendMessage("setNPC", this.gameObject);
-                //                listePopup.Add(go);
+                go.SendMessage("SetNPCName", npcName);
+                go.SendMessage("SetNPCWork", npcWork);
+                go.SendMessage("SetSortingOrder", sortingOrder);
+                go.SendMessage("SetNPC", this.gameObject);
                 mAudio.Play();
-                mSortingOrder++;
+                sortingOrder++;
                 coroutine = WaitAndPopup(2.0f, coll);
                 StartCoroutine(coroutine);
                 canPopup = false;
@@ -162,21 +158,20 @@ public class PnjController : MonoBehaviour {
         canPopup = true;
     }
 
-    public void popupDestroy(string msg)
+    public void PopupDestroy(string msg)
     {
         questCount--;
     }
 
-    private void destroyMe()
+    public void SetCanMove(bool newCanMove)
     {
-/*        int x = 0;
+        canMove = newCanMove;
+        StartCoroutine(WaitCanMove());
+    }
 
-        while (listePopup[x])
-        {
-            x++;
-        }
-        print(x);
-*/
-        Destroy(this.gameObject);
+    private IEnumerator WaitCanMove()
+    {
+        yield return new WaitForSeconds(2.0f);
+        canMove = true;
     }
 }

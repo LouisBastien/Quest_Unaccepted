@@ -8,11 +8,11 @@ public class PopupManager : MonoBehaviour {
     private int nb_popup;
     public GameObject gameManager;
 
-	void Start () {
+	public void Start () {
 		
 	}
 	
-	void Update () {
+	public void Update () {
         if (GameManager.onPause == false)
         {
             nb_popup = GameObject.FindGameObjectsWithTag("Popup").Length;

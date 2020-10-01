@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestGenerator : MonoBehaviour {
+public class QuestGenerator {
 
-    private string[] mQuestTable = new string[]
+    private readonly string[] questTable = new string[]
     {
         "Prend ma quete !",
         "Veuillez ramasser 2256 bleuets rose dans mon jardin.",
@@ -42,8 +42,8 @@ public class QuestGenerator : MonoBehaviour {
         "Trouvez quatres pommes de pin dans la forêt perdu dont on ignore où elle se trouve, les apporter a voyant dans le quartier dela mendiance pour en faire un parchemin de vérité grâce auquel vous devrez demander à ma femme si oui ou non elle m'a trompé avec le bûcheron."
     };
 
-	public string generateQuest()
+	public string GenerateQuest()
     {
-        return mQuestTable[Random.Range(0, mQuestTable.Length - 1)];
+        return questTable[Random.Range(0, questTable.Length - 1)];
     }
 }

@@ -5,54 +5,53 @@ using UnityEngine.UI;
 
 public class PopupController : MonoBehaviour {
 
-    private static int TEXT_NAME = 0;
-    private static int TEXT_WORK = 1;
-    private static int TEXT_QUEST = 2;
+    private static readonly int TEXT_NAME = 0;
+    private static readonly int TEXT_WORK = 1;
+    private static readonly int TEXT_QUEST = 2;
     private Text[] mTextTab;
 
-    private string PnjName;
-    private string PnjWork;
-    private int mSortingOrder;
-
     private GameObject npc;
+    private string npcName;
+    private string npcWork;
+    private int sortingOrder;
 
     public GameObject obj;
-    public Renderer mRenderer;
-    public Canvas mCanvas;
+    public Renderer rendererPopup;
+    public Canvas canvasPopup;
         
-    void Start()
+    public void Start()
     {
         QuestGenerator questGenerator = new QuestGenerator();
 
         mTextTab = GetComponentsInChildren<Text>();
-        mTextTab[TEXT_NAME].text = PnjName;
-        mTextTab[TEXT_WORK].text = PnjWork;
-        mTextTab[TEXT_QUEST].text = questGenerator.generateQuest();
-        mRenderer.sortingOrder = mSortingOrder;
-        mCanvas.sortingOrder = mSortingOrder;
+        mTextTab[TEXT_NAME].text = npcName;
+        mTextTab[TEXT_WORK].text = npcWork;
+        mTextTab[TEXT_QUEST].text = questGenerator.GenerateQuest();
+        rendererPopup.sortingOrder = sortingOrder;
+        canvasPopup.sortingOrder = sortingOrder;
     }
 
-    public void setPnjName(string name)
+    public void SetNPCName(string name)
     {
-        PnjName = name;
+        npcName = name;
     }
 
-    public void setPnjWork(string work)
+    public void SetNPCWork(string work)
     {
-        PnjWork = work;
+        npcWork = work;
     }
 
-    public void setSortingOrder(int order)
+    public void SetSortingOrder(int order)
     {
-        mSortingOrder = order;
+        sortingOrder = order;
     }
 
-    public void setNPC(GameObject NPC)
+    public void SetNPC(GameObject NPC)
     {
         npc = NPC;
     }
-
-    public void acceptQuest()
+ 
+    public void AcceptQuest()
     {
         if (GameManager.onPause == false)
         {
@@ -60,13 +59,13 @@ public class PopupController : MonoBehaviour {
         }
     }
 
-    public void declineQuest()
+    public void DeclineQuest()
     {
         if (GameManager.onPause == false)
         {
             GameObject.Destroy(obj);
-            npc.SendMessage("popupDestroy", "Done");
-            GameManager.Instance.SendMessage("addScore", 10);
+            npc.SendMessage("PopupDestroy", "Done");
+            GameManager.Instance.SendMessage("AddScore", 10);
         }
     }
 }

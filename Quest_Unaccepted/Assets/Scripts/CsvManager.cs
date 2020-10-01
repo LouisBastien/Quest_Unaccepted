@@ -9,18 +9,18 @@ public class CsvManager : MonoBehaviour {
 
     public void Init()
     {
-        path = getPath();
+        path = GetPath();
         if (!File.Exists(path))
         {
             File.Create(path).Dispose();
         }
     }
 
-    public void readFromFile()
+    public void ReadFromFile()
     {
+        int intScore;
         string name;
         string score;
-        int intScore;
 
         string[] lines = File.ReadAllLines(path);
         for (int i = 0; i < lines.Length; i++)
@@ -36,7 +36,7 @@ public class CsvManager : MonoBehaviour {
 
     public void WriteInFile(string[] names, int[] scores)
     {
-        path = getPath();
+        path = GetPath();
         string[] lines = new string[5];
 
         for (int i = 0; i < 5; i++)
@@ -46,7 +46,7 @@ public class CsvManager : MonoBehaviour {
         File.WriteAllLines(path, lines);
     }
 
-    private string getPath()
+    private string GetPath()
     {
         #if UNITY_EDITOR
         return Application.dataPath + "/" + "highscores.csv";
